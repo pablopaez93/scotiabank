@@ -1,0 +1,74 @@
+<form class="example-form" [formGroup]="form">
+    <mat-form-field class="example-full-width">
+      <input matInput disabled value="demographic data">
+    </mat-form-field>
+  
+    <table class="example-full-width" cellspacing="0">
+        <tr>
+            <td>
+                <mat-form-field class="example-full-width">
+                <mat-label>full Name</mat-label>
+                <input formControlName="fullName" maxlength="100" matInput>
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="example-full-width">
+                <mat-label>age</mat-label>
+                <input formControlName="age" pattern="^[0-9,$]*$" type="text" maxlength="3" matInput>
+                </mat-form-field>
+            </td>
+            <td>
+                
+            </td>
+        </tr>
+    </table>
+    <p>
+        <label id="example-radio-group-label">Pick your gender</label>
+        <mat-radio-group
+            aria-labelledby="example-radio-group-label"
+            class="example-radio-group"
+            formControlName="gender">
+            <mat-radio-button class="example-radio-button" *ngFor="let gender of genders" [value]="gender">
+                {{gender}}
+            </mat-radio-button>
+        </mat-radio-group>
+    </p>
+    
+    <p>
+      <mat-form-field class="example-full-width">
+        <mat-label>Address</mat-label>
+        <textarea formControlName="address" matInput placeholder="Ex. 100 Main St"></textarea>
+      </mat-form-field>
+    </p>
+
+    <mat-form-field class="example-full-width">
+        <input matInput disabled value="credit card info">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>credit card number</mat-label>
+        <input formControlName="creditCard" maxlength="16" matInput>
+    </mat-form-field>
+    <table class="example-full-width" cellspacing="0">
+        <tr>
+            <td>
+                <mat-form-field appearance="fill">
+                    <mat-label>Due date</mat-label>
+                    <input matInput formControlName="dueDate" [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker startView="multi-year" (yearSelected)="chosenYearHandler($event)"
+                    (monthSelected)="chosenMonthHandler($event, picker)" #picker></mat-datepicker>
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="example-full-width">
+                <mat-label>CVV</mat-label>
+                <input formControlName="CVV" pattern="^[0-9,$]*$" type="text" maxlength="3" matInput>
+                </mat-form-field>
+            </td>
+        </tr>
+    </table>
+
+    <button mat-button (click)="sendRequest()" color="primary" *ngIf="form.valid">Submit</button>
+    <button mat-button disabled *ngIf="!form.valid">Submit</button>
+  </form>
